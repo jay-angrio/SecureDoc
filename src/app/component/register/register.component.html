@@ -1,0 +1,122 @@
+<app-navbar></app-navbar>
+<div class="login-container">
+  <mat-card>
+    <div>
+      <div class="text-center primary">
+        <h1>Register</h1>
+      </div>
+      <form [formGroup]="registerDetail">
+        <div>
+          <mat-form-field appearance="outline" class="inputWidth">
+            <mat-label>Enter First Name</mat-label>
+            <input
+              matInput
+              formControlName="fname"
+              type="text"
+              placeholder="Enter First Name"
+            />
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+          <div
+            class="text-danger"
+            *ngIf="
+              registerDetail.get('fname')?.touched &&
+              registerDetail.get('fname')?.invalid
+            "
+          >
+            Enter First Name !!
+          </div>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="inputWidth">
+            <mat-label>Enter Last Name</mat-label>
+            <input
+              matInput
+              formControlName="lname"
+              type="text"
+              placeholder="Enter LasT Name"
+            />
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+          <div
+            class="text-danger"
+            *ngIf="
+              registerDetail.get('lname')?.touched &&
+              registerDetail.get('lname')?.invalid
+            "
+          >
+            Enter Last Name !!
+          </div>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="inputWidth">
+            <mat-label>Enter your Email.</mat-label>
+            <input
+              matInput
+              formControlName="email"
+              placeholder="Enter your Email."
+            />
+            <mat-icon matSuffix>mail</mat-icon>
+          </mat-form-field>
+          <div
+            class="text-danger"
+            *ngIf="
+              registerDetail.get('email')?.touched &&
+              registerDetail.get('email')?.invalid
+            "
+          >
+            Enter valid Email !!
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="
+              registerDetail.get('email')?.touched &&
+              registerDetail.get('email')?.pattern
+            "
+          >
+            Invalid email format !!
+          </div>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="inputWidth">
+            <mat-label>Enter your password</mat-label>
+            <input
+              matInput
+              formControlName="password"
+              [type]="hide ? 'password' : 'text'"
+            />
+            <div
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </div>
+          </mat-form-field>
+          <div
+            class="text-danger"
+            *ngIf="
+              registerDetail.get('password')?.touched &&
+              registerDetail.get('password')?.invalid
+            "
+          >
+            Enter 6 digit password !!
+          </div>
+        </div>
+        <div>
+          <button
+            [disabled]="!registerDetail.valid"
+            (click)="onRegisterSubmit()"
+            class="inputWidth"
+            mat-flat-button
+            color="primary"
+          >
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>
