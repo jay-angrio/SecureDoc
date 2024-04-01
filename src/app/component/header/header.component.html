@@ -1,25 +1,14 @@
-<!-- <div class="container">
-  <h1>Welcome to Our Website</h1>
-  <p>We offer amazing services.</p>
-  <button (click)="logOut()">Log Out</button>
-  <div>
-    {{ user }}
-  </div>
-</div> -->
-
 <div>
-  <nav class="navbar px-5">
-    <div class="navbar-brand">SecureDocHub</div>
-    <!-- <div class="navbar-links">
-        <div>Home</div>
-        <div>About</div>
-        <div>Contact Us</div>
-      </div> -->
+  <nav class="navbar sidePadding">
+    <div class="navbar-brand titleFont">SecureDocHub</div>
+
     <div class="navbar-links">
-      <!-- <div>{{ user }}</div>
+      <div class="text-capitalize userFont">
+        Hi, {{ user?.firstName + " " + user?.lastName }}
+      </div>
       <mat-icon class="text-danger" (click)="logOut()"
         >power_settings_new</mat-icon
-      > -->
+      >
     </div>
   </nav>
 </div>

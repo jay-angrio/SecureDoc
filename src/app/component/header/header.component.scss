@@ -1,31 +1,7 @@
-// .container {
-//   max-width: 600px;
-//   margin: 50px auto;
-//   text-align: center;
-// }
-
-// h1 {
-//   color: #007bff;
-// }
-
-// p {
-//   font-size: 18px;
-//   line-height: 1.5;
-// }
-
-// .btn {
-//   display: inline-block;
-//   padding: 10px 20px;
-//   background-color: #007bff;
-//   color: #fff;
-//   text-decoration: none;
-//   border-radius: 5px;
-//   transition: background-color 0.3s ease;
-// }
-
-// .btn:hover {
-//   background-color: #0056b3;
-// }
+.sidePadding {
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+}
 
 .navbar-back {
   background-color: #3f51b5;
@@ -42,8 +18,8 @@
   .btn-width {
     width: 100%;
   }
-  .navbar {
-    justify-content: center !important;
+  .sidePadding {
+    padding: 10px !important;
   }
 }
 
@@ -76,4 +52,16 @@
 
 .navbar-link:hover {
   background-color: #0056b3;
+}
+
+.titleFont {
+  font-size: 25px;
+  font-weight: 500;
+  font-family: Georgia, serif;
+}
+
+.userFont {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: Georgia, serif;
 }

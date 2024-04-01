@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { SupabaseService } from 'src/app/service/supabase.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -9,7 +10,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   registerDetail: any;
   hide = true;
-  constructor(private fb: FormBuilder) {
+  userId: any;
+  constructor(
+    private fb: FormBuilder,
+    private auth: SupabaseService,
+    private router: Router
+  ) {
     this.registerDetail = fb.group({
       fname: ['', [Validators.required]],
       lname: ['', [Validators.required]],
@@ -27,5 +33,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onRegisterSubmit() {}
+  onRegisterSubmit() {
+    localStorage.setItem(
+      'userDetail',
+      JSON.stringify(this.registerDetail.value)
+    );
+
+    this.router.navigate(['/loading']);
+  }
 }

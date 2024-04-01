@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingScreenComponent } from './component/loading-screen/loading-screen.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { MainComponent } from './component/main/main.component';
+import { AboutComponent } from './component/about/about.component';
+import { ContactComponent } from './component/contact/contact.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { AuthanticationGuard } from './service/authantication.guard';
 
 @NgModule({
   declarations: [
@@ -26,6 +35,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     NavbarComponent,
     HeaderComponent,
+    LoadingScreenComponent,
+    SidebarComponent,
+    MainComponent,
+    AboutComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +52,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
+    MatProgressSpinnerModule,
+    PdfViewerModule,
+    MatRadioModule,
   ],
-  providers: [],
+  providers: [AuthanticationGuard],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

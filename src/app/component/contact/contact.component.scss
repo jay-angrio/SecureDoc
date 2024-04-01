@@ -1,0 +1,25 @@
+mat-form-field {
+  width: 100% !important;
+}
+
+.screen-padding {
+  padding: 3rem;
+}
+
+.titleFont {
+  font-size: 30px;
+  font-weight: 500;
+  font-family: Georgia, serif;
+}
+
+.userFont {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Georgia, serif;
+}
+
+@media screen and (max-width: 768px) {
+  .screen-padding {
+    padding: 0px !important;
+  }
+}
