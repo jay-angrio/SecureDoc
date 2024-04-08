@@ -1,33 +1,145 @@
-<div class="row m-0 screen-padding">
-  <div class="col-md-12 text-center"><h1 class="titleFont">Contact Us</h1></div>
-  <div class="col-md-6">
-    <mat-form-field appearance="outline" class="userFont">
-      <mat-label>First Name</mat-label>
-      <input matInput placeholder="First Name" type="text" />
-    </mat-form-field>
+<form
+  [formGroup]="contactus"
+  action="https://formspree.io/f/xvoevkkk"
+  method="POST"
+  enctype="contactus"
+>
+  <div class="row m-0 screen-padding">
+    <div class="col-md-12 text-center">
+      <h1 class="titleFont">Contact Us</h1>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="userFont">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          placeholder="First Name"
+          type="text"
+          formControlName="name"
+        />
+      </mat-form-field>
+      <div
+        *ngIf="contactus.get('name')?.touched && contactus.get('name')?.invalid"
+        class="text-danger p-2 pt-0"
+      >
+        Name is required..
+      </div>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="userFont">
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          placeholder="Last Name"
+          type="text"
+          formControlName="lastname"
+        />
+      </mat-form-field>
+      <div
+        *ngIf="
+          contactus.get('lastname')?.touched &&
+          contactus.get('lastname')?.invalid
+        "
+        class="text-danger p-2 pt-0"
+      >
+        Last name is required..
+      </div>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="userFont">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="Email"
+          type="email"
+          formControlName="email"
+        />
+      </mat-form-field>
+      <div
+        *ngIf="
+          contactus.get('email')?.touched && contactus.get('email')?.invalid
+        "
+      >
+        <div
+          *ngIf="contactus.get('email')?.errors?.['required']"
+          class="text-danger p-2 pt-0"
+        >
+          Email is required..
+        </div>
+        <div
+          *ngIf="contactus.get('email')?.errors?.['pattern']"
+          class="text-danger p-2 pt-0"
+        >
+          Enter valid email..
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="userFont">
+        <mat-label>Phone No.</mat-label>
+        <input
+          matInput
+          placeholder="Phone No."
+          type="number"
+          formControlName="mobile"
+        />
+      </mat-form-field>
+      <div
+        *ngIf="
+          contactus.get('mobile')?.touched && contactus.get('mobile')?.invalid
+        "
+      >
+        <div
+          *ngIf="contactus.get('mobile')?.errors?.['required']"
+          class="text-danger p-2 pt-0"
+        >
+          Phone number is required..
+        </div>
+        <div
+          *ngIf="
+            contactus.get('mobile')?.errors?.['pattern']
+          "
+          class="text-danger p-2 pt-0"
+        >
+          Enter valid phone number..
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <mat-form-field appearance="outline" class="userFont">
+        <mat-label>About</mat-label>
+        <textarea matInput type="text" formControlName="about"></textarea>
+      </mat-form-field>
+      <div
+        *ngIf="
+          contactus.get('about')?.touched && contactus.get('about')?.invalid
+        "
+      >
+        <div
+          *ngIf="
+            contactus.get('about')?.errors?.['required']
+          "
+          class="text-danger p-2 pt-0"
+        >
+          About is required..
+        </div>
+        <div
+          *ngIf="contactus.get('about')?.hasError('minlength')"
+          class="text-danger p-2 pt-0"
+        >
+          Enter atleast 10 characters..
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <button
+        [disabled]="!contactus.valid"
+        (click)="onSubmit()"
+        mat-flat-button
+        color="primary"
+      >
+        Submit
+      </button>
+    </div>
   </div>
-  <div class="col-md-6">
-    <mat-form-field appearance="outline" class="userFont">
-      <mat-label>Last Name</mat-label>
-      <input matInput placeholder="Last Name" type="text" />
-    </mat-form-field>
-  </div>
-  <div class="col-md-6">
-    <mat-form-field appearance="outline" class="userFont">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" type="email" />
-    </mat-form-field>
-  </div>
-  <div class="col-md-6">
-    <mat-form-field appearance="outline" class="userFont">
-      <mat-label>Phone No.</mat-label>
-      <input matInput placeholder="Phone No." type="number" />
-    </mat-form-field>
-  </div>
-  <div class="col-md-12">
-    <mat-form-field appearance="outline" class="userFont">
-      <mat-label>About</mat-label>
-      <textarea matInput type="text"></textarea>
-    </mat-form-field>
-  </div>
-</div>
+</form>

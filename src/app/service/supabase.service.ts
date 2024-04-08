@@ -61,4 +61,14 @@ export class SupabaseService {
   async addData(documents: any) {
     return await this.supabase.from('files').insert(documents).select('*');
   }
+
+  async getDocuments(userId: string) {
+    return await this.supabase.from('files').select('*').eq('userId', userId);
+  }
+
+  async getDocumentId(id: string) {
+    console.log('id', id);
+
+    return await this.supabase.from('files').select('*').eq('id', id);
+  }
 }

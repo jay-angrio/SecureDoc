@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   id: any;
   option: any;
   supaPath: any;
+  urlId: any;
 
   document!: document;
   constructor(private auth: SupabaseService, private sanitizer: DomSanitizer) {}
@@ -31,6 +32,18 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     let user = JSON.parse(localStorage.getItem('userdetail') as string);
     this.id = user?.userId;
+
+    // this.auth
+    //   .getDocuments()
+    //   .then((res) => {
+    //     console.log('res', res.data);
+    //     if (res.data) {
+    //       this.urlId = res.data[0].id;
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log('err', err);
+    //   });
   }
 
   openGallery() {

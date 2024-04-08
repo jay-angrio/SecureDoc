@@ -10,3 +10,10 @@ export interface document {
   pdfSrc: any;
   lock: string;
 }
+
+export interface filesData {
+  id: any;
+  userId: string;
+  pdfSrc: string;
+  lock: string;
+}

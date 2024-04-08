@@ -25,6 +25,10 @@ import { AboutComponent } from './component/about/about.component';
 import { ContactComponent } from './component/contact/contact.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { AuthanticationGuard } from './service/authantication.guard';
+import { HttpClientModule } from '@angular/common/http';
+import { MatStepperModule } from '@angular/material/stepper';
+import { ViewDocumentComponent } from './component/view-document/view-document.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { AuthanticationGuard } from './service/authantication.guard';
     MainComponent,
     AboutComponent,
     ContactComponent,
+    ViewDocumentComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,9 @@ import { AuthanticationGuard } from './service/authantication.guard';
     MatProgressSpinnerModule,
     PdfViewerModule,
     MatRadioModule,
+    HttpClientModule,
+    MatStepperModule,
+    MatChipsModule,
   ],
   providers: [AuthanticationGuard],
   bootstrap: [AppComponent],

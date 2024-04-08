@@ -10,11 +10,16 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { AboutComponent } from './component/about/about.component';
 import { ContactComponent } from './component/contact/contact.component';
 import { AuthanticationGuard } from './service/authantication.guard';
+import { ViewDocumentComponent } from './component/view-document/view-document.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
+  },
+  {
+    path: 'view-documnet/:id',
+    component: ViewDocumentComponent,
   },
   {
     path: 'register',

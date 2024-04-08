@@ -1,1 +1,26 @@
 <p>dashboard works!</p>
+<div
+  class="d-flex justify-content-around align-items-center p-2"
+  *ngFor="let data of userData"
+>
+  <div>
+    <!-- <iframe
+      [src]="ValidateUrl(data.pdfSrc)"
+      width="300px"
+      height="50px
+    "
+      frameborder="0"
+    ></iframe> -->
+    {{ data.pdfSrc }}
+  </div>
+  <div>{{ data.lock }}</div>
+  <div>
+    <button
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/view-documnet', data.id]"
+    >
+      Open
+    </button>
+  </div>
+</div>
