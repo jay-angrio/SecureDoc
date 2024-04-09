@@ -12,6 +12,7 @@ import { SupabaseService } from 'src/app/service/supabase.service';
 export class ViewDocumentComponent implements OnInit {
   data!: filesData;
   urlId: any;
+  isLock: boolean = false;
 
   constructor(
     private supabase: SupabaseService,
@@ -19,16 +20,26 @@ export class ViewDocumentComponent implements OnInit {
     private aRoutes: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.urlId = this.aRoutes.snapshot.params['id'];
     console.log('id user', this.urlId);
 
-    this.supabase.getDocumentId(this.urlId).then((res) => {
+    await this.supabase.getDocumentId(this.urlId).then((res) => {
       console.log('res', res);
       if (res.data) {
         this.data = res.data[0];
       }
     });
+    let value = prompt('Please enter password');
+    if (value?.trim()) {
+      console.log('value', value);
+      console.log('data lock', this.data.lock);
+
+      if (value === this.data.lock) {
+        console.log('val', value);
+        this.isLock = true;
+      }
+    }
   }
 
   ValidateUrl(url: any) {

@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <div>
     <input
       class=""
@@ -27,7 +27,6 @@
       style="width: 400px; height: 500px"
     ></iframe>
   </div>
-
   <div *ngIf="pdfSrc">
     <label id="example-radio-group-label">Pick your favorite season</label>
     <mat-radio-group [(ngModel)]="selectOption">
@@ -57,21 +56,219 @@
     </div>
   </div>
 
-  <div *ngIf="selectOption">
-    <button
-      [disabled]="
-        (!passwordOption && selectOption === 'Password') || !selectOption
-      "
-      (click)="onGetUrl()"
-      [disabled]="!selectOption"
-      mat-raised-button
-      color="primary"
-    >
-      Get URL
-    </button>
+  <div *ngIf="selectOption" class="d-flex">
+    <div>
+      <button
+        [disabled]="
+          (!passwordOption && selectOption === 'Password') || !selectOption
+        "
+        (click)="onGetUrl()"
+        [disabled]="!selectOption"
+        mat-raised-button
+        color="primary"
+      >
+        Get URL
+      </button>
+    </div>
+    <div *ngIf="urlGet != ''" class="w-75 m-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <input matInput [value]="urlGet" />
+        <mat-icon matSuffix>content_copy</mat-icon>
+      </mat-form-field>
+    </div>
   </div>
-</div>
+</div> -->
 
-<button class="btn btn-white-view" [routerLink]="['/view-documnet', urlId]">
-  view
-</button>
+<div class="pt-5">
+  <mat-card>
+    <mat-horizontal-stepper #stepper>
+      <!-- Step 1: File Input -->
+      <mat-step>
+        <ng-template matStepLabel>Add Document</ng-template>
+        <div class="row">
+          <div class="col-md-5">
+            <mat-card class="card-back">
+              <mat-card-header class="title-font p-1"
+                >Adding Files:</mat-card-header
+              >
+              <mat-card-content>
+                <ul class="content-font">
+                  <li>Begin by clicking on the "Add Document" button.</li>
+                  <li>This action will prompt a file selection dialog box.</li>
+                  <li>
+                    Choose the file(s) you want to upload and click 'Open' or
+                    equivalent to confirm your selection.
+                  </li>
+                  <li>The selected file(s) will now be added.</li>
+                </ul>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div>
+            <input
+              class=""
+              type="file"
+              (change)="handleFileInput($event)"
+              id="fileInput"
+              #fileInput
+              style="display: none"
+              [(ngModel)]="documents"
+            />
+          </div>
+          <div class="p-5" *ngIf="!pdfSrc">
+            <button
+              (click)="onBtnClick()"
+              mat-raised-button
+              color="primary"
+              class="buttonFont"
+            >
+              Add Document
+            </button>
+          </div>
+          <iframe
+            *ngIf="pdfSrc"
+            [src]="pdfSrc"
+            style="width: 400px; height: 500px"
+          ></iframe>
+        </div>
+        <button mat-button matStepperNext>Next</button>
+      </mat-step>
+
+      <!-- Step 2: Select Option -->
+      <mat-step>
+        <ng-template matStepLabel>Select Option</ng-template>
+        <div class="row">
+          <div class="col-md-5">
+            <mat-card class="card-back">
+              <mat-card-header class="title-font p-1">
+                Selecting an Option:
+              </mat-card-header>
+              <mat-card-content>
+                <ul class="content-font">
+                  <li>
+                    Once the file(s) are added, you'll see a list of options to
+                    choose from.
+                  </li>
+                  <li>
+                    Review the options and select the one that suits your needs.
+                  </li>
+                  <li>
+                    If you choose the "Password" option, you'll need to enter
+                    your password in the provided field.
+                  </li>
+                </ul>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <label id="example-radio-group-label"
+            >Pick your favorite season</label
+          >
+          <mat-radio-group [(ngModel)]="selectOption">
+            <div *ngFor="let season of seasons" class="p-2">
+              <mat-radio-button [value]="season">{{ season }}</mat-radio-button>
+            </div>
+          </mat-radio-group>
+
+          <div *ngIf="selectOption === 'Password'" class="p-2">
+            <mat-form-field>
+              <mat-label>Enter your password</mat-label>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                [(ngModel)]="passwordOption"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-button (click)="stepper.previous()">Back</button>
+
+            <button
+              (click)="stepper.next()"
+              [disabled]="
+                (!passwordOption && selectOption === 'Password') ||
+                !selectOption
+              "
+              mat-button
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Step 3: Get URL -->
+      <mat-step>
+        <ng-template matStepLabel>Get URL</ng-template>
+        <div class="row">
+          <div class="col-md-5">
+            <mat-card class="card-back">
+              <mat-card-header class="title-font p-1">
+                Getting URL:
+              </mat-card-header>
+              <mat-card-content>
+                <ul class="content-font">
+                  <li>
+                    After selecting an option, a "Get URL" button will become
+                    active.
+                  </li>
+                  <li>Click on the "Get URL" button.</li>
+                  <li>
+                    If you've chosen the "Password" option, ensure you've
+                    entered the password correctly.
+                  </li>
+                  <li>
+                    Once clicked, the URL will be generated based on your
+                    selected option and/or entered password.
+                  </li>
+                  <li>
+                    The generated URL will be displayed in a text field below
+                    the button.
+                  </li>
+                  <li>
+                    You can now copy the URL by clicking on the copy icon beside
+                    the text field (if available) or by manually selecting and
+                    copying the URL.
+                  </li>
+                  <li>The copied URL can then be pasted and used as needed.</li>
+                </ul>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <div class="py-3">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onGetUrl()"
+            [disabled]="!selectOption"
+          >
+            Get URL
+          </button>
+          <div *ngIf="urlGet != ''" class="w-75 mt-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <input matInput [value]="urlGet" #urlInput readonly />
+              <mat-icon (click)="copyUrl(urlInput.value)" matSuffix
+                >content_copy</mat-icon
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <button mat-button (click)="stepper.previous()">Back</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>

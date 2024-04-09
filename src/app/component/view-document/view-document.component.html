@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center" *ngIf="isLock">
   <div>
     <iframe
       [src]="ValidateUrl(data.pdfSrc)"
@@ -12,3 +12,14 @@
     {{ data.lock }}
   </div>
 </div>
+<div *ngIf="!isLock">
+  <h1 class="text-danger">No data</h1>
+</div>
+
+<ng-template #callAPIDialog>
+  <h2 matDialogTitle>Hello dialog!</h2>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose="no">No</button>
+    <button mat-button matDialogClose="yes">Yes</button>
+  </mat-dialog-actions>
+</ng-template>

@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ViewDocumentComponent } from './component/view-document/view-document.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MatChipsModule } from '@angular/material/chips';
     HttpClientModule,
     MatStepperModule,
     MatChipsModule,
+    MatDialogModule,
   ],
   providers: [AuthanticationGuard],
   bootstrap: [AppComponent],

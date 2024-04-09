@@ -1,10 +1,12 @@
 import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { document } from 'src/app/interface/model';
 import { SupabaseService } from 'src/app/service/supabase.service';
 import { environment } from 'src/environments/environment';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-home',
@@ -23,27 +25,21 @@ export class HomeComponent implements OnInit {
   option: any;
   supaPath: any;
   urlId: any;
+  urlGet: string = '';
 
   document!: document;
-  constructor(private auth: SupabaseService, private sanitizer: DomSanitizer) {}
+  constructor(
+    private auth: SupabaseService,
+    private sanitizer: DomSanitizer,
+    private _formBuilder: FormBuilder,
+    private clipboard: Clipboard
+  ) {}
 
   seasons: string[] = ['Email', 'Password'];
 
   ngOnInit(): void {
     let user = JSON.parse(localStorage.getItem('userdetail') as string);
     this.id = user?.userId;
-
-    // this.auth
-    //   .getDocuments()
-    //   .then((res) => {
-    //     console.log('res', res.data);
-    //     if (res.data) {
-    //       this.urlId = res.data[0].id;
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log('err', err);
-    //   });
   }
 
   openGallery() {
@@ -76,22 +72,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  // handleFileInput(event: any) {
-  //   const file: File = event.target.files[0];
-  //   const allowedTypes = ['application/pdf'];
-
-  //   let name = 'idProof' + new Date().getTime() + '.pdf';
-  //   if (allowedTypes.includes(file.type) && file.size <= 5 * 1024 * 1024) {
-  //     this.auth.uploadImage('application/' + name, file).then((res) => {
-  //       console.log('res of the pdf file: ' + res);
-  //       this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
-  //         this.imgPath + res
-  //       );
-  //       console.log('pdfsrc', this.pdfSrc);
-  //     });
-  //   }
-  // }
-
   onBtnClick() {
     this.openGallery();
   }
@@ -112,6 +92,19 @@ export class HomeComponent implements OnInit {
 
     this.auth.addData(this.document).then((res) => {
       console.log('data', res);
+
+      if (res?.data) {
+        this.urlGet = 'http://localhost:4200/view-documnet/' + res?.data[0]?.id;
+      }
     });
+  }
+
+  copyUrl(url: string) {
+    if (url) {
+      this.clipboard.copy(url);
+      if (this.clipboard.copy(url)) {
+        alert('Link Copied');
+      }
+    }
   }
 }
