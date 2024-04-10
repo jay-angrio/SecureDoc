@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
     console.log(event.target.files[0]);
     const file = event.target.files[0];
 
-    let name = file.name;
+    let name = 'idProof' + new Date().getTime() + file.name;
 
     if (file.size <= 10 * 1024 * 1024) {
       this.auth
@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
       userId: this.id,
       pdfSrc: this.imgPath + this.supaPath,
       lock: this.option,
+      lock_type: this.selectOption,
     };
 
     this.auth.addData(this.document).then((res) => {

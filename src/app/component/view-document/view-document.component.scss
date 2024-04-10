@@ -1,0 +1,24 @@
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.iframe-size {
+  width: 100%;
+  height: 100vh !important;
+}
+
+.nodata-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.data-color {
+  color: #6c63ff;
+}

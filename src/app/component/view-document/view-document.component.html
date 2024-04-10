@@ -1,25 +1,96 @@
-<div class="text-center" *ngIf="isLock">
-  <div>
-    <iframe
-      [src]="ValidateUrl(data.pdfSrc)"
-      width="300px"
-      height="300px"
-      frameborder="0"
-    ></iframe>
-  </div>
-  <!-- <div>{{ data.lock }}</div> -->
-  <div>
-    {{ data.lock }}
-  </div>
+<div *ngIf="isLock">
+  <iframe
+    [src]="ValidateUrl(data.pdfSrc)"
+    class="iframe-size"
+    frameborder="0"
+  ></iframe>
 </div>
-<div *ngIf="!isLock">
-  <h1 class="text-danger">No data</h1>
+<div *ngIf="!isLock" class="nodata-text" (click)="onReload()">
+  <div class="text-center">
+    <img
+      width="50%"
+      height="50%"
+      src="../../../assets/undraw_no_data_re_kwbl.svg"
+      alt=""
+    />
+    <h1 class="data-color p-3">No data</h1>
+  </div>
 </div>
 
-<ng-template #callAPIDialog>
-  <h2 matDialogTitle>Hello dialog!</h2>
-  <mat-dialog-actions align="end">
-    <button mat-button matDialogClose="no">No</button>
-    <button mat-button matDialogClose="yes">Yes</button>
-  </mat-dialog-actions>
+<ng-template #dialogTemplate>
+  <h2 mat-dialog-title>SecureDocHub</h2>
+  <div mat-dialog-content>
+    <!-- Dialog content goes here -->
+    <form #loginForm="ngForm">
+      <div *ngIf="data.lock_type == 'Email'">
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="emailDialog"
+            placeholder="Enter your email"
+            type="email"
+            name="email"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          />
+        </mat-form-field>
+        <div
+          *ngIf="
+            loginForm?.controls?.['email']?.touched && loginForm?.controls?.['email']?.invalid
+          "
+        >
+          <div
+            *ngIf="loginForm?.controls?.['email']?.errors?.['required']"
+            class="text-danger"
+          >
+            Email is required.
+          </div>
+          <div
+            *ngIf="loginForm?.controls?.['email']?.errors?.['pattern']"
+            class="text-danger"
+          >
+            Invalid email format.
+          </div>
+        </div>
+      </div>
+
+      <!-- Dialog content goes here -->
+      <div *ngIf="data.lock_type == 'Password'">
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="passwordInput"
+            placeholder="Enter password"
+            [type]="hide ? 'password' : 'text'"
+            name="password"
+            required
+          />
+          <div
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </div>
+        </mat-form-field>
+
+        <div
+          *ngIf="loginForm?.controls?.['password']?.touched && loginForm?.controls?.['password']?.invalid"
+        >
+          <div
+            *ngIf="loginForm?.controls?.['password']?.errors?.['required']"
+            class="text-danger"
+          >
+            Password is required.
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onOk()">OK</button>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
+  </div>
 </ng-template>
