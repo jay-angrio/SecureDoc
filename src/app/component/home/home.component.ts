@@ -95,7 +95,8 @@ export class HomeComponent implements OnInit {
       console.log('data', res);
 
       if (res?.data) {
-        this.urlGet = 'http://localhost:4200/view-documnet/' + res?.data[0]?.id;
+        this.urlGet =
+          'https://dochub-e5625.web.app/view-documnet/' + res?.data[0]?.id;
       }
     });
   }
