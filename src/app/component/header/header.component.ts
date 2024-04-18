@@ -9,6 +9,8 @@ import { SupabaseService } from 'src/app/service/supabase.service';
 })
 export class HeaderComponent implements OnInit {
   user: any;
+  selectPage : any ;
+  
   constructor(private auth: SupabaseService, private router: Router) {}
 
   ngOnInit(): void {

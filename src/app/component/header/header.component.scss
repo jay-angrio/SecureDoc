@@ -21,6 +21,10 @@
   .sidePadding {
     padding: 10px !important;
   }
+  .iocn-position{
+    justify-content: start !important;
+    // display: flex;
+  }
 }
 
 .navbar {
@@ -35,6 +39,13 @@
 .navbar-brand {
   font-size: 24px;
   color: white;
+}
+
+.navbar-tags{
+  font-size: 20px;
+  color: white;
+  font-family: Georgia, serif;
+
 }
 
 .navbar-links {
@@ -60,8 +71,21 @@
   font-family: Georgia, serif;
 }
 
+
 .userFont {
   font-size: 18px;
   font-weight: 500;
   font-family: Georgia, serif;
+}
+
+.iocn-position{
+  justify-content: end;
+}
+
+.active-clr{
+  color: #04ff00;
+}
+
+.deactive-clr{
+  color: white;
 }
