@@ -79,9 +79,7 @@
               </mat-card-content>
             </mat-card>
           </div>
-          <label id="example-radio-group-label"
-            >Pick your favorite season</label
-          >
+          <label id="example-radio-group-label">Select only one</label>
           <mat-radio-group [(ngModel)]="selectOption">
             <div *ngFor="let season of seasons" class="p-2">
               <mat-radio-button [value]="season">{{ season }}</mat-radio-button>
