@@ -45,10 +45,13 @@
             </button>
           </div>
           <iframe
-            *ngIf="pdfSrc"
+            *ngIf="pdfSrc && !showLoader"
             [src]="pdfSrc"
-            style="width: 400px; height: 500px"
+            style="width: 400px; height: 500px; padding: 20px"
           ></iframe>
+          <div *ngIf="showLoader" class="d-flex justify-content-center">
+            <mat-spinner [diameter]="50"></mat-spinner>
+          </div>
         </div>
         <button mat-button matStepperNext>Next</button>
       </mat-step>
@@ -87,25 +90,55 @@
           </mat-radio-group>
 
           <div *ngIf="selectOption === 'Password'" class="p-2">
-            <mat-form-field>
-              <mat-label>Enter your password</mat-label>
-              <input
-                matInput
-                [type]="hide ? 'password' : 'text'"
-                [(ngModel)]="passwordOption"
-              />
-              <button
-                mat-icon-button
-                matSuffix
-                (click)="hide = !hide"
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide"
+            <form #passfrom="ngForm">
+              <mat-form-field>
+                <mat-label>Enter your password</mat-label>
+                <input
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  [(ngModel)]="passwordOption"
+                  name="password"
+                  required
+                  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{6,}"
+                  minlength="6"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+              </mat-form-field>
+              <div
+                *ngIf="
+            passfrom?.controls?.['password']?.touched && passfrom?.controls?.['password']?.invalid
+          "
               >
-                <mat-icon>{{
-                  hide ? "visibility_off" : "visibility"
-                }}</mat-icon>
-              </button>
-            </mat-form-field>
+                <div
+                  *ngIf="passfrom?.controls?.['password']?.errors?.['required']"
+                  class="text-danger"
+                >
+                  Password is required.
+                </div>
+                <div
+                  *ngIf="passfrom?.controls?.['password']?.errors?.['pattern']"
+                  class="text-danger"
+                >
+                  Password must be strong.
+                </div>
+                <div
+                  *ngIf="passfrom?.controls?.['password']?.errors?.['minlength']"
+                  class="text-danger"
+                >
+                  Password atleast 6 charecter.
+                </div>
+              </div>
+            </form>
           </div>
           <div>
             <button mat-button (click)="stepper.previous()">Back</button>

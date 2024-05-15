@@ -1,8 +1,8 @@
-<div *ngIf="userData.length == 0" class="nodata-text pt-2">
-  <div class="text-center">
+<div *ngIf="!userData" class="nodata-text pt-2">
+  <div class="text-center img-center">
     <img
-      width="50%"
-      height="45%"
+      width="250px"
+      height="250px"
       src="../../../assets/undraw_no_data_re_kwbl.svg"
       alt=""
     />
@@ -17,7 +17,7 @@
         [src]="ValidateUrl(data.pdfSrc)"
         frameborder="0"
         width="250px"
-        height="300px !important"
+        height="400px !important"
       ></iframe>
       <div class="d-flex justify-content-between align-items-center">
         <div>Type : {{ data.lock_type }}</div>

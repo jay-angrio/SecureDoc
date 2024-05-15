@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   supaPath: any;
   urlId: any;
   urlGet: string = '';
+  showLoader: boolean = false;
 
   document!: document;
   constructor(

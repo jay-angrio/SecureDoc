@@ -39,6 +39,7 @@ export class ViewDocumentComponent implements OnInit {
       if (res.data) {
         this.data = res.data[0];
       }
+      console.log('data', this.data);
     });
 
     this.openDialog();
@@ -74,27 +75,31 @@ export class ViewDocumentComponent implements OnInit {
     // } else {
     //   this.showError = true; // Display error message
     // }
-
-    if (this.data.lock_type == 'Password') {
+    if (this.data.lock_type === 'Password') {
       if (this.passwordInput === this.data.lock) {
         this.dialogRef.close(this.passwordInput);
         this.isLock = true; // Pass the value of the input field when closing the dialog
       } else {
+        if (this.passwordInput !== this.data.lock) {
+          alert('Password not match');
+        }
         this.showError = true; // Display error message
       }
     } else {
       if (this.emailDialog) {
         console.log('email', this.emailDialog);
         this.dialogRef.close(this.emailDialog);
-
         this.isLock = true; // Pass the value of the input field when closing the dialog
+      } else if (this.emailDialog == null) {
+        alert('Please enter your email address');
+        this.isLock = false;
       } else {
         this.isLock = true;
       }
     }
   }
 
-  onEmail(value: any) {
-    console.log('value', value);
-  }
+  // onEmail(value: any) {
+  //   console.log('value', value);
+  // }
 }
